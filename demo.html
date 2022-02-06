@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="tag-editor.css"/>
+<script type="text/javascript" src="tag-editor.js"></script>
+
+<script>
+$(document).ready(function() {
+	const params = {
+			"delimiters": ["Comma"]
+			// entering any of the "delimiters" while typing will end the current tag data entry
+			// any valid event.code can be a delimiter for ex "Space", "Escape"
+	};
+	
+	setupTagEditor(params);
+	
+	// optional dynamic width detection will change the 'hit width' of the remove button if you have changed the font size or other style cues
+	try {
+		const dynamicRemoveButtonWidthDetect = $("#widthDetectTag")[0].offsetWidth;
+		if (dynamicRemoveButtonWidthDetect > window.globalTagEditorRemoveButtonWidth) {
+			window.globalTagEditorRemoveButtonWidth = dynamicRemoveButtonWidthDetect;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+	
+	$("#widthDetectTag").remove();
+});
+</script>
+</head>
+<body>
+<div style="visibility:hidden;">
+<span class="tag" style="padding:0; border-radius:0; margin-bottom:0;"><span class="tag-data" id="widthDetectTag"></span></span>
+</div>
+<form>
+	<div class="tag-editor w-100 pl-2 pt-2 pb-1 bg-light border rounded" data-field-id="test_tags_1">
+		<span class="tags">
+			<span class="tag">
+			  <span class="tag-data">Test1</span>
+			</span>
+		</span>
+	</div>
+	<br/>
+	<input id="test_tags_1" type="text" size="50" name="test_tags_1"/>
+
+	<div class="tag-editor w-100 pl-2 pt-2 pb-1 bg-light border rounded" data-field-id="test_tags_2">
+		<span class="tags">
+			<span class="tag">
+			  <span class="tag-data">Test2</span>
+			</span>
+		</span>
+	</div>
+	<br/>
+	<input id="test_tags_2" type="text" size="50" name="test_tags_2"/>
+</form>
+</body>
+</html>
